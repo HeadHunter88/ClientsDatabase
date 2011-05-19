@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+    
+    <RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/RelLayoutText"
+		android:layout_alignParentTop="true"
+		android:layout_above="@+id/LinLayoutBtn"
+		android:layout_alignLeft="@+id/LinLayoutBtn"
+		android:layout_alignRight="@+id/LinLayoutBtn" >
+		
+	    <TextView
+	    	android:layout_marginTop="5dip"
+	    	android:layout_marginLeft="5dip"
+	    	android:layout_marginRight="5dip"
+	    	android:layout_alignParentLeft="true"
+	    	android:layout_height="wrap_content"
+	    	android:text="Nome: "
+	    	android:textSize="16dip"
+	    	android:layout_width="fill_parent"
+	    	android:id="@+id/viewNome" />
+	    	
+	    <EditText
+	    	android:layout_marginBottom="5dip"
+	    	android:layout_below="@+id/viewNome"
+	    	android:layout_height="wrap_content"
+	    	android:textSize="16dip"
+	    	android:layout_alignLeft="@+id/viewNome"
+	    	android:layout_alignRight="@+id/viewNome"
+	    	android:id="@+id/txtNome"
+	    	android:maxLines="1"
+	    	android:layout_width="match_parent"/>
+	    
+	    <TextView
+	    	android:layout_marginTop="5dip"
+	    	android:layout_below="@+id/txtNome"
+	    	android:layout_height="wrap_content"
+	    	android:textSize="16dip"
+	    	android:text="Contacto: "
+	    	android:layout_width="wrap_content"
+	    	android:layout_alignLeft="@+id/txtNome"
+	    	android:layout_alignRight="@+id/txtNome"
+	    	android:id="@+id/viewContacto"/>
+	    
+	    <EditText
+	    	android:layout_marginBottom="5dip"
+	    	android:layout_below="@+id/viewContacto"
+	    	android:layout_height="wrap_content"
+	    	android:textSize="16dip"
+	    	android:layout_alignLeft="@+id/viewContacto"
+	    	android:layout_alignRight="@+id/viewContacto"
+	    	android:id="@+id/txtContacto"
+	    	android:maxLines="1"
+	    	android:layout_width="match_parent"/>
+
+    </RelativeLayout>
