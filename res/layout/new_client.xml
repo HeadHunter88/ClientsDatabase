@@ -30,7 +30,8 @@
 	    	android:layout_alignRight="@+id/viewNome"
 	    	android:id="@+id/txtNome"
 	    	android:maxLines="1"
-	    	android:layout_width="match_parent"/>
+	    	android:layout_width="match_parent"
+	    	android:inputType="textWebEditText" />
 	    
 	    <TextView
 	    	android:layout_marginTop="5dip"
@@ -52,6 +53,38 @@
 	    	android:layout_alignRight="@+id/viewContacto"
 	    	android:id="@+id/txtContacto"
 	    	android:maxLines="1"
-	    	android:layout_width="match_parent"/>
+	    	android:layout_width="match_parent"
+	    	android:inputType="textWebEditText" />
+	    	
+	    <TextView
+	    	android:id="@+id/viewMorada"
+	    	android:text="Morada: "
+	    	android:textSize="16dip"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="5dip"
+	    	android:layout_below="@+id/txtContacto"
+	    	android:layout_alignLeft="@+id/txtContacto"
+	    	android:layout_alignRight="@+id/txtContacto" />
+	    	
+	    <EditText
+	    	android:textSize="16dip"
+	    	android:layout_marginBottom="5dip"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:id="@+id/txtMorada"
+	    	android:maxLines="1"
+	    	android:layout_below="@+id/viewMorada"
+	    	android:layout_alignLeft="@+id/viewMorada"
+	    	android:layout_alignRight="@+id/viewMorada"
+	    	android:inputType="textWebEditText" />
+	    	
+	    <Button
+	    	android:layout_below="@+id/txtMorada"
+	    	android:layout_width="wrap_content"
+	    	android:id="@+id/btnAddClient"
+	    	android:text="Adicionar"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignRight="@+id/txtMorada" />
 
     </RelativeLayout>

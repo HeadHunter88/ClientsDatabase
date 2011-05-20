@@ -5,12 +5,14 @@ public class Clientes{
 	private String id;
 	private String nome;
 	private String contacto;
+	private String morada;
 	
-	public Clientes(String ID, String Nome, String Contacto)
+	public Clientes(String ID, String Nome, String Contacto, String Morada)
 	{
 		setId(ID);
 		setNome(Nome);
 		setContacto(Contacto);
+		setMorada(Morada);
 	}
 	
 	public Clientes(Clientes newClient)
@@ -18,6 +20,7 @@ public class Clientes{
 		setId(newClient.getId());
 		setNome(newClient.getNome());
 		setContacto(newClient.getContacto());
+		setMorada(newClient.getMorada());
 	}
 	
 	public void setId(String id) {
@@ -37,5 +40,11 @@ public class Clientes{
 	}
 	public String getContacto() {
 		return contacto;
+	}
+	public void setMorada(String morada) {
+		this.morada = morada;
+	}
+	public String getMorada() {
+		return morada;
 	}
 }

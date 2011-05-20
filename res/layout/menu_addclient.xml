@@ -2,7 +2,9 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/BackNewClient"
-          android:title="Back" />
+          android:title="Back"
+          android:icon="@drawable/ic_menu_back" />
     <item android:id="@+id/addClient"
-          android:title="Adicionar" />
+          android:title="Adicionar"
+          android:icon="@drawable/ic_menu_add" />
 </menu>

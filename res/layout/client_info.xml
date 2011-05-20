@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-        <ImageView
-        	android:src="@drawable/icon"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentRight="true"
-        	android:id="@+id/imgUser"
-        	android:layout_marginTop="5dip"
-        	android:layout_marginLeft="5dip"
-        	android:layout_marginRight="5dip" />
+
         <TextView
         	android:layout_marginTop="5dip"
         	android:layout_marginLeft="5dip"
         	android:layout_marginRight="5dip"
-        	android:layout_width="wrap_content"
+        	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
         	android:textSize="16dip"
         	android:id="@+id/lblUser"
         	android:text="Nome:"
-        	android:layout_alignParentLeft="true"
-        	android:layout_toLeftOf="@+id/imgUser" />
+        	android:layout_alignParentLeft="true" />
         	
         <TextView
         	android:layout_width="wrap_content"
@@ -51,5 +42,26 @@
         	android:textSize="18dip"
         	android:layout_alignLeft="@+id/lblCreated"
         	android:layout_alignRight="@+id/lblCreated" />
+        	
+        <TextView
+        	android:id="@+id/lblMorada"
+        	android:text="Contacto:"
+        	android:textSize="16dip"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="20dip"
+        	android:layout_below="@+id/userContacto"
+        	android:layout_alignLeft="@+id/userContacto"
+        	android:layout_alignRight="@+id/userContacto" />
+        	
+        <TextView
+        	android:id="@+id/userMorada"
+        	android:text="TextView"
+        	android:textSize="18dip"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/lblMorada"
+        	android:layout_alignLeft="@+id/lblMorada"
+        	android:layout_alignRight="@+id/lblMorada" />
         	
     </RelativeLayout>

@@ -16,44 +16,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class ClientsDatabase extends Activity {
-
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.menu_main, menu);
-        return true;
-    }
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	    case R.id.addClientForm:
-	        newClient();
-	        return true;
-	    case R.id.actualizar:
-	        FillListView();
-	        return true;
-	    default:
-	        return super.onOptionsItemSelected(item);
-	    }
-	}
-	
-	public void newClient()
-	{
-		Intent i = new Intent(ClientsDatabase.this, AddClient.class);
-        startActivityForResult(i,0);
-	}
-	
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		FillListView();
-	}
-	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +38,13 @@ public class ClientsDatabase extends Activity {
         		startActivityForResult(it,RESULT_OK);
         	}
         });
+        lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				ThrowDeleteEditAlert(arg2);
+				return true;
+			}
+		});
         
         OpenCreateDataBase();
         CreateTable();
@@ -99,21 +76,49 @@ public class ClientsDatabase extends Activity {
 		list.setAdapter(adapter);
 		
 	}
-	
+	void ThrowDeleteEditAlert(final int position) {
+		
+		final String [] items=new String []{"Edit","Delete","Cancel"};
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+		builder.setTitle("Options");
+
+		builder.setItems(items, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+				case 0:
+					client = new Clientes(listClients.get(position));
+					Intent i = new Intent(ClientsDatabase.this, EditItem.class);
+			        startActivityForResult(i,0);
+					break;
+				case 1:
+					DeleteClient(position);
+					break;
+				case 2:
+					break;
+				default:
+					break;
+				}
+			}
+		});
+
+		builder.show();
+		
+	}
 	void ThrowAlert()
 	{
 		final AlertDialog.Builder builder=new AlertDialog.Builder(this);
-		builder.setTitle("Alert Dialog");
-		builder.setMessage("This is the alert's body");
+		builder.setTitle("No existing clients!");
+		builder.setMessage("Do you want to add a new client?");
 		builder.setIcon(android.R.drawable.ic_dialog_alert);
 
-		builder.setPositiveButton("OK", new OnClickListener() {
+		builder.setPositiveButton("Yes", new OnClickListener() {
 		public void onClick(DialogInterface dialog, int which) {
 				newClient();
 			}
 		});
 
-		builder.setNegativeButton("Cancel", new OnClickListener() {
+		builder.setNegativeButton("No", new OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 				AlertDialog ad=builder.create();
@@ -122,7 +127,58 @@ public class ClientsDatabase extends Activity {
 		});
 		builder.show();
 	}
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.layout.menu_main, menu);
+        return true;
+    }	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.addClientForm:
+	        newClient();
+	        return true;
+	    case R.id.actualizar:
+	        FillListView();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}	
+	public void newClient()
+	{
+		Intent i = new Intent(ClientsDatabase.this, AddClient.class);
+        startActivityForResult(i,0);
+	}
+	public void DeleteClient(final int position)
+	{
+		final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+		builder.setTitle("Warning");
+		builder.setMessage("Do you really want to eliminate the client " + listClients.get(position).getNome() + "?");
+		builder.setIcon(android.R.drawable.ic_dialog_alert);
 	
+		builder.setPositiveButton("Yes", new OnClickListener() {
+		public void onClick(DialogInterface dialog, int which) {
+				ClientsDB.delete("Clientes", "id="+listClients.get(position).getId(), null);
+				FillListView();
+			}
+		});
+	
+		builder.setNegativeButton("No", new OnClickListener() {
+	
+			public void onClick(DialogInterface dialog, int which) {
+				AlertDialog ad=builder.create();
+				ad.cancel();
+			}
+		});
+		builder.show();
+		
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		FillListView();
+	}
 	public void LoadClientes()
 	{
 		listClients.clear();
@@ -132,7 +188,8 @@ public class ClientsDatabase extends Activity {
 			 String id = tableQuery.getString(0);
 			 String nome = tableQuery.getString(1);
 			 String contacto = tableQuery.getString(2);
-			 Clientes clt = new Clientes(id,nome,contacto);
+			 String morada = tableQuery.getString(3);
+			 Clientes clt = new Clientes(id,nome,contacto,morada);
 			 listClients.add(clt);
 			 tableQuery.moveToNext();
 		 }
@@ -162,7 +219,7 @@ public class ClientsDatabase extends Activity {
 	}
 	public void CreateTable() {
 		try{
-	    	String crtTblClientes = "CREATE TABLE Clientes ( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, contacto TEXT);";
+	    	String crtTblClientes = "CREATE TABLE Clientes ( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, contacto TEXT, morada TEXT);";
 	    	ClientsDB.execSQL(crtTblClientes);
 		}
 		catch (Exception e) {

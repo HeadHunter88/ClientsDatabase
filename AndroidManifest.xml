@@ -7,15 +7,17 @@
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".ClientsDatabase"
-                  android:label="@string/app_name">
+                  android:label="Clients Database">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name=".AddClient" class=".AddClient" android:label="Adicionar Cliente" >
+		<activity android:name=".AddClient" class=".AddClient" android:label="Add Client" >
        </activity>
-       <activity android:name=".ClientsInfo" class=".ClientsInfo" android:label="Informações de Cliente" >
-       </activity> 
+       <activity android:name=".ClientsInfo" class=".ClientsInfo" android:label="Client Information" >
+       </activity>
+       <activity android:name=".EditItem" class=".EditItem" android:label="Edit Client Information" >
+       </activity>  
     </application>
 </manifest>

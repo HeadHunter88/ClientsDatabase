@@ -47,7 +47,9 @@ public class ClientsInfo extends Activity {
 		TextView txtNome = (TextView) findViewById(R.id.userName);
 		txtNome.setText(Html.fromHtml(ct.getNome()));
 		TextView txtContacto = (TextView) findViewById(R.id.userContacto);
-		txtContacto.setText(Html.fromHtml(ct.getContacto()));	
+		txtContacto.setText(Html.fromHtml(ct.getContacto()));
+		TextView txtMorada = (TextView) findViewById(R.id.userMorada);
+		txtMorada.setText(Html.fromHtml(ct.getMorada()));
 		
 	}
 }

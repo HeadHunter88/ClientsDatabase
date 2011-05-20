@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -30,8 +32,6 @@ public class AddClient extends Activity  {
 	        return super.onOptionsItemSelected(item);
 	    case R.id.addClient:
 	        AddCliente();
-	        setResult(RESULT_OK);
-        	finish(); //EESTA AQUI FUNCIONA POR FAVOR!!!
 	        break;
 	    case R.id.BackNewClient:
 	    	setResult(RESULT_OK);
@@ -55,8 +55,21 @@ public class AddClient extends Activity  {
         		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         		txtBox = (EditText) findViewById(R.id.txtNome);
         		imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
+        		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        		txtBox = (EditText) findViewById(R.id.txtMorada);
+        		imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
             }
         });        
+        
+        Button btnAddClient = (Button) findViewById(R.id.btnAddClient);
+        btnAddClient.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				AddCliente();
+				
+			}
+		});
         
     }
     
@@ -64,10 +77,12 @@ public class AddClient extends Activity  {
 		ContentValues clt = new ContentValues();
 		EditText txtNome = (EditText) findViewById(R.id.txtNome);
 		EditText txtContacto = (EditText) findViewById(R.id.txtContacto);
-		
+		EditText txtMorada = (EditText) findViewById(R.id.txtMorada);
 		clt.put("nome", txtNome.getText().toString());
 		clt.put("contacto",txtContacto.getText().toString());
+		clt.put("morada",txtMorada.getText().toString());
 		ClientsDatabase.ClientsDB.insert("Clientes", null, clt);
-		
+		setResult(RESULT_OK);
+    	finish();
 	}
 }

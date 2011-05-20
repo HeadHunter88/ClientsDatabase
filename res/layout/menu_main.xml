@@ -2,7 +2,9 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/addClientForm"
-          android:title="Adicionar Cliente" />
+          android:title="Adicionar Cliente"
+          android:icon="@drawable/ic_menu_add" />
     <item android:id="@+id/actualizar"
-          android:title="Actualizar" />
+          android:title="Actualizar"
+          android:icon="@drawable/ic_menu_refresh" />
 </menu>
